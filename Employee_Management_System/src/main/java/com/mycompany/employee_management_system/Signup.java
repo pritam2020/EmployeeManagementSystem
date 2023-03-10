@@ -4,10 +4,7 @@
  */
 package com.mycompany.employee_management_system;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  *
@@ -18,8 +15,7 @@ public class Signup extends javax.swing.JFrame {
     /**
      * Creates new form Signup
      */
-    String mpassword,mconfirmpassword,mfirstname,mlastname,memail,mcatogary,mcontact;
-    int mage;
+    
     public Signup() {
         
         initComponents();
@@ -171,46 +167,61 @@ public class Signup extends javax.swing.JFrame {
         mfirstname=firstName.getText();
         mlastname=lastName.getText();
         memail=email.getText().toString();
-        mage=Integer.parseInt(age.getText());
+        mage=age.getText();
         mcontact=contact.getText();
-        mcatogary=String.valueOf(jComboBox1.getSelectedItem());
+        mcategary=String.valueOf(jComboBox1.getSelectedItem());
         //System.out.println(mpassword+"\n"+mconfirmpassword+"\n"+mfirstname+"\n"+mlastname+"\n"+memail+"\n"+mage+"\n"+mcontact+"\n"+mcatogary);
-       
-
-        try{  
-            Class.forName("com.mysql.jdbc.Driver");  
-            Connection con=DriverManager.getConnection(  
-            "jdbc:mysql://localhost:3306/employeemanagementsystem","root","pritam");  
-            //here sonoo is database name, root is username and password  
-            Statement stmt=con.createStatement();  
-            stmt.executeUpdate("insert into employee values(\""+mfirstname+"\","
-                                                                          +"\""+mlastname+"\","
-                                                                          +mage+","
-                                                                          +"\""+mpassword+"\","
-                                                                          +"\""+memail+"\","
-                                                                          +mcontact+","
-                                                                          +"\""+mcatogary+"\""
-                                                                          +",\"@sayan\")");  
-//            while(rs.next())  
-//            System.out.println(rs.getString(1)+"  "+rs.getString(2)+"  "+rs.getInt(3)+rs.getString(4)+rs.getString(5)+rs.getInt(6)+rs.getString(7));  
-//            con.close();  
+        if(passVerification(mpassword,mconfirmpassword) && inputfieldValidate()==true)
+        {
+            try{
+               
+                conn = DriverManager.getConnection(url,user,dbpassword);
+                System.out.println("conection info"+conn);
+                st=conn.prepareStatement(sql);
+                st.setString(1,mfirstname);
+                st.setString(2,mlastname);
+                st.setInt(3,23);
+                st.setString(4,mlastname+mfirstname+"@"+mage);
+                st.setString(5,memail);
+                st.setString(6,mpassword);
+                st.setString(7,"1000000000");
+                int rs=st.executeUpdate();
+                System.out.println(rs);
+               
+               }
+            
+            
+            catch (SQLException ex) {
+               
+                System.out.println(ex);
+            }
+        }else
+        {
+           
         }
-        catch(Exception e)
-        { 
-            System.out.println(e);
-        }  
         
         
         
         
     }//GEN-LAST:event_submitActionPerformed
-public String passwordVerification(String mpassword,String mconfirmpassword){
+public  boolean passVerification(String mpassword,String mconfirmpassword){
     if(mpassword.equals(mconfirmpassword))
-        return "true";
+        return true;
     else 
-        return "password dosenot match";
+        {
+         System.out.println("password dosenot match");
+         return false;
+                }
    
 }
+public boolean inputfieldValidate(){
+    if(mpassword!=null &&mconfirmpassword!=null && mfirstname!=null && mlastname!=null && mage!=null &&memail!=null &&mcontact!=null && mcategary!=null)
+        return true;
+    else
+    {
+        System.out.println("not all input field are entered");
+        return false;}
+}   
     /**
      * @param args the command line arguments
      */
@@ -239,6 +250,8 @@ public String passwordVerification(String mpassword,String mconfirmpassword){
         //</editor-fold>
 
         /* Create and display the form */
+        
+       // System.out.println(i);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Signup().setVisible(true);
@@ -265,4 +278,12 @@ public String passwordVerification(String mpassword,String mconfirmpassword){
     private javax.swing.JPasswordField password;
     private javax.swing.JButton submit;
     // End of variables declaration//GEN-END:variables
+    Connection conn;
+    PreparedStatement st;
+    String mpassword,mconfirmpassword,mfirstname,mlastname,memail,mcategary,mcontact;
+    String mage;
+    private static final String url ="jdbc:mysql://localhost:3306/emloyeemanagementsystem";
+    private static final String dbpassword ="PRITAMROY";
+    private static final String user="root";
+    String sql="insert into employee values (?,?,?,?,?,?,?)";
 }
