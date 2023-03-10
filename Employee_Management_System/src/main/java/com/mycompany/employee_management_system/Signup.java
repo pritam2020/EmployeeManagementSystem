@@ -166,16 +166,16 @@ public class Signup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
-//        mpassword =String.valueOf(password.getPassword());
-//        mconfirmpassword =String.valueOf(confirmPassword.getPassword());
-//        mfirstname=firstName.getText();
-//        mlastname=lastName.getText();
-//        memail=email.getText().toString();
-//        mage=Integer.parseInt(age.getText());
-//        mcontact=contact.getText();
-//        mcatogary=String.valueOf(jComboBox1.getSelectedItem());
-//        System.out.println(mpassword+"\n"+mconfirmpassword+"\n"+mfirstname+"\n"+mlastname+"\n"+memail+"\n"+mage+"\n"+mcontact+"\n"+mcatogary);
-//       
+        mpassword =String.valueOf(password.getPassword());
+        mconfirmpassword =String.valueOf(confirmPassword.getPassword());
+        mfirstname=firstName.getText();
+        mlastname=lastName.getText();
+        memail=email.getText().toString();
+        mage=Integer.parseInt(age.getText());
+        mcontact=contact.getText();
+        mcatogary=String.valueOf(jComboBox1.getSelectedItem());
+        //System.out.println(mpassword+"\n"+mconfirmpassword+"\n"+mfirstname+"\n"+mlastname+"\n"+memail+"\n"+mage+"\n"+mcontact+"\n"+mcatogary);
+       
 
         try{  
             Class.forName("com.mysql.jdbc.Driver");  
@@ -183,10 +183,17 @@ public class Signup extends javax.swing.JFrame {
             "jdbc:mysql://localhost:3306/employeemanagementsystem","root","pritam");  
             //here sonoo is database name, root is username and password  
             Statement stmt=con.createStatement();  
-            ResultSet rs=stmt.executeQuery("select * from employee");  
-            while(rs.next())  
-            System.out.println(rs.getString(1)+"  "+rs.getString(2)+"  "+rs.getInt(3)+rs.getString(4)+rs.getString(5)+rs.getInt(6)+rs.getString(7));  
-            con.close();  
+            stmt.executeUpdate("insert into employee values(\""+mfirstname+"\","
+                                                                          +"\""+mlastname+"\","
+                                                                          +mage+","
+                                                                          +"\""+mpassword+"\","
+                                                                          +"\""+memail+"\","
+                                                                          +mcontact+","
+                                                                          +"\""+mcatogary+"\""
+                                                                          +",\"@sayan\")");  
+//            while(rs.next())  
+//            System.out.println(rs.getString(1)+"  "+rs.getString(2)+"  "+rs.getInt(3)+rs.getString(4)+rs.getString(5)+rs.getInt(6)+rs.getString(7));  
+//            con.close();  
         }
         catch(Exception e)
         { 
