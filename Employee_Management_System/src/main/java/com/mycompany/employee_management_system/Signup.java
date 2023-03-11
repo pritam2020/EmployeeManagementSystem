@@ -170,8 +170,8 @@ public class Signup extends javax.swing.JFrame {
         mage=age.getText();
         mcontact=contact.getText();
         mcategary=String.valueOf(jComboBox1.getSelectedItem());
-        //System.out.println(mpassword+"\n"+mconfirmpassword+"\n"+mfirstname+"\n"+mlastname+"\n"+memail+"\n"+mage+"\n"+mcontact+"\n"+mcatogary);
-        if(passVerification(mpassword,mconfirmpassword) && inputfieldValidate()==true)
+        System.out.println(mpassword+"\n"+mconfirmpassword+"\n"+mfirstname+"\n"+mlastname+"\n"+memail+"\n"+mage+"\n"+mcontact+"\n"+mcategary);
+        if(inputfieldValidate()==true && passVerification(mpassword,mconfirmpassword)==true)
         {
             try{
                
@@ -180,7 +180,7 @@ public class Signup extends javax.swing.JFrame {
                 st=conn.prepareStatement(sql);
                 st.setString(1,mfirstname);
                 st.setString(2,mlastname);
-                st.setInt(3,23);
+                st.setInt(3,Integer.parseInt(mage));
                 st.setString(4,mlastname+mfirstname+"@"+mage);
                 st.setString(5,memail);
                 st.setString(6,mpassword);
@@ -215,7 +215,7 @@ public  boolean passVerification(String mpassword,String mconfirmpassword){
    
 }
 public boolean inputfieldValidate(){
-    if(mpassword!=null &&mconfirmpassword!=null && mfirstname!=null && mlastname!=null && mage!=null &&memail!=null &&mcontact!=null && mcategary!=null)
+    if(!mpassword.equals(null) && !mconfirmpassword.equals(null) && !mfirstname.equals(null) && !mlastname.equals(null) && !mage.equals(null) &&!memail.equals(null) &&!mcontact.equals(null) && !mcategary.equals(null))
         return true;
     else
     {
@@ -280,8 +280,7 @@ public boolean inputfieldValidate(){
     // End of variables declaration//GEN-END:variables
     Connection conn;
     PreparedStatement st;
-    String mpassword,mconfirmpassword,mfirstname,mlastname,memail,mcategary,mcontact;
-    String mage;
+    String mpassword,mconfirmpassword,mfirstname,mlastname,memail,mcategary,mcontact,mage;
     private static final String url ="jdbc:mysql://localhost:3306/emloyeemanagementsystem";
     private static final String dbpassword ="PRITAMROY";
     private static final String user="root";
