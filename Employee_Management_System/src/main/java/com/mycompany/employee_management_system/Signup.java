@@ -51,7 +51,7 @@ public class Signup extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jComboBox1.setMaximumRowCount(2);
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee", "manager" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "employee", "manager" }));
 
         jLabel1.setText("age");
 
@@ -166,63 +166,66 @@ public class Signup extends javax.swing.JFrame {
         mconfirmpassword =String.valueOf(confirmPassword.getPassword());
         mfirstname=firstName.getText();
         mlastname=lastName.getText();
-        memail=email.getText().toString();
+        memail=email.getText();
         mage=age.getText();
         mcontact=contact.getText();
         mcategary=String.valueOf(jComboBox1.getSelectedItem());
         System.out.println(mpassword+"\n"+mconfirmpassword+"\n"+mfirstname+"\n"+mlastname+"\n"+memail+"\n"+mage+"\n"+mcontact+"\n"+mcategary);
         if(inputfieldValidate()==true && passVerification(mpassword,mconfirmpassword)==true)
         {
-            try{
-               
-                conn = DriverManager.getConnection(url,user,dbpassword);
-                System.out.println("conection info"+conn);
-                st=conn.prepareStatement(sql);
-                st.setString(1,mfirstname);
-                st.setString(2,mlastname);
-                st.setInt(3,Integer.parseInt(mage));
-                st.setString(4,mlastname+mfirstname+"@"+mage);
-                st.setString(5,memail);
-                st.setString(6,mpassword);
-                st.setString(7,"1000000000");
-                int rs=st.executeUpdate();
-                System.out.println(rs);
-               
-               }
+            if(mcategary.equals("employee")) {
+                executeQuery(SqlE);
+            } else {
+                executeQuery(SqlM);
+            }
             
             
-            catch (SQLException ex) {
+        }else{}            
+    }//GEN-LAST:event_submitActionPerformed
+    
+    public  boolean passVerification(String mpassword,String mconfirmpassword){
+        if(mpassword.equals(mconfirmpassword)) {
+            return true;
+        } else 
+            {
+             System.out.println("password dosenot match");
+             return false;
+            }
+   
+    }
+    
+    private void executeQuery(String sql){
+        try{
+               
+            conn = DriverManager.getConnection(Url,dbUser,dbPassword);
+            System.out.println("conection info"+conn);
+            st=conn.prepareStatement(sql);
+            st.setString(1,mfirstname);
+            st.setString(2,mlastname);
+            st.setInt(3,Integer.parseInt(mage));
+            st.setString(4,mlastname+mfirstname+"@"+mage);
+            st.setString(5,memail);
+            st.setString(6,mpassword);
+            st.setString(7,"1000000000");
+            int rs=st.executeUpdate();
+            System.out.println(rs);
+               
+            }catch (SQLException ex){
                
                 System.out.println(ex);
-            }
-        }else
-        {
-           
-        }
-        
-        
-        
-        
-    }//GEN-LAST:event_submitActionPerformed
-public  boolean passVerification(String mpassword,String mconfirmpassword){
-    if(mpassword.equals(mconfirmpassword))
-        return true;
-    else 
-        {
-         System.out.println("password dosenot match");
-         return false;
                 }
-   
-}
-public boolean inputfieldValidate(){
-    if(!mpassword.equals(null) && !mconfirmpassword.equals(null) && !mfirstname.equals(null) && !mlastname.equals(null) && !mage.equals(null) &&!memail.equals(null) &&!mcontact.equals(null) && !mcategary.equals(null))
+    }
+
+
+    public boolean inputfieldValidate(){
+    if(!mpassword.equals(null) && !mconfirmpassword.equals(null) && !mfirstname.equals(null) && !mlastname.equals(null) && !mage.equals(null) &&!memail.equals(null) &&!mcontact.equals(null) && !mcategary.equals(null)) {
         return true;
-    else
+    } else
     {
         System.out.println("not all input field are entered");
         return false;}
 }   
-    /**
+       /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -252,10 +255,8 @@ public boolean inputfieldValidate(){
         /* Create and display the form */
         
        // System.out.println(i);
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Signup().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Signup().setVisible(true);
         });
     }
 
@@ -278,11 +279,12 @@ public boolean inputfieldValidate(){
     private javax.swing.JPasswordField password;
     private javax.swing.JButton submit;
     // End of variables declaration//GEN-END:variables
-    Connection conn;
-    PreparedStatement st;
-    String mpassword,mconfirmpassword,mfirstname,mlastname,memail,mcategary,mcontact,mage;
-    private static final String url ="jdbc:mysql://localhost:3306/emloyeemanagementsystem";
-    private static final String dbpassword ="PRITAMROY";
-    private static final String user="root";
-    String sql="insert into employee values (?,?,?,?,?,?,?)";
+    private Connection conn;
+    private PreparedStatement st;
+    private String mpassword,mconfirmpassword,mfirstname,mlastname,memail,mcategary,mcontact,mage;
+    private static final String Url ="jdbc:mysql://localhost:3306/emloyeemanagementsystem";
+    private static final String dbPassword ="PRITAMROY";
+    private static final String dbUser="root";
+    private static final String SqlE="insert into employee values (?,?,?,?,?,?,?)";
+    private static final String SqlM="insert into manager values (?,?,?,?,?,?,?)";
 }
