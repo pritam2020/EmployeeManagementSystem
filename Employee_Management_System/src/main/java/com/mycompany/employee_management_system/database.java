@@ -8,29 +8,13 @@ package com.mycompany.employee_management_system;
  *
  * @author RIVERSIDE-19
  */
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import javax.swing.*;  
 public class database {
+    public static final String Url ="jdbc:mysql://localhost:3306/emloyeemanagementsystem";
+    public static final String dbPassword ="PRITAMROY";
+    public static final String dbUser="root";
+   
 
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-//        try{
-//            String hostname="localhost";
-//            String instanceName="MSSQLSERVER02";
-//            String username="user1";
-//            String database="EmployeeManagementSystem";
-//            String password="user1@pass";
-//
-//            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//            String ConnectionUrl="jdbc:sqlserver://"+hostname+":1433"+";instances="+instanceName+";databaseName="+database;
-//            Connection conn=DriverManager.getConnection(ConnectionUrl,username,password);
-//        }
-//        catch(Exception e){
-//            e.printStackTrace();
-//        }
-       
-    }
+    
 }
 
 

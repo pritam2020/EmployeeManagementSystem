@@ -197,7 +197,8 @@ public class Signup extends javax.swing.JFrame {
     private void executeQuery(String sql){
         try{
                
-            conn = DriverManager.getConnection(Url,dbUser,dbPassword);
+            
+            conn = DriverManager.getConnection(database.Url,database.dbUser,database.dbPassword);
             System.out.println("conection info"+conn);
             st=conn.prepareStatement(sql);
             st.setString(1,mfirstname);
@@ -279,12 +280,13 @@ public class Signup extends javax.swing.JFrame {
     private javax.swing.JPasswordField password;
     private javax.swing.JButton submit;
     // End of variables declaration//GEN-END:variables
-    private Connection conn;
+    
     private PreparedStatement st;
+    private Connection conn;
     private String mpassword,mconfirmpassword,mfirstname,mlastname,memail,mcategary,mcontact,mage;
-    private static final String Url ="jdbc:mysql://localhost:3306/emloyeemanagementsystem";
-    private static final String dbPassword ="PRITAMROY";
-    private static final String dbUser="root";
+//    private static final String Url ="jdbc:mysql://localhost:3306/emloyeemanagementsystem";
+//    private static final String dbPassword ="PRITAMROY";
+//    private static final String dbUser="root";
     private static final String SqlE="insert into employee values (?,?,?,?,?,?,?)";
     private static final String SqlM="insert into manager values (?,?,?,?,?,?,?)";
 }
