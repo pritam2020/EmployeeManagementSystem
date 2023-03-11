@@ -206,7 +206,7 @@ public class Signup extends javax.swing.JFrame {
             st.setString(4,mlastname+mfirstname+"@"+mage);
             st.setString(5,memail);
             st.setString(6,mpassword);
-            st.setString(7,"1000000000");
+            st.setString(7,mcontact);
             int rs=st.executeUpdate();
             System.out.println(rs);
                
