@@ -3,22 +3,44 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.employee_management_system;
-
+import java.sql.*;
 /**
  *
  * @author RIVERSIDE-19
  */
 public class EmployeeDetails extends javax.swing.JFrame {
+    
+   
 
-    private static void fetchData() {
-        
+    private  void fetchData() {
+        try {
+            conn=DriverManager.getConnection(database.Url,database.dbUser,database.dbPassword);
+            PreparedStatement st=conn.prepareStatement(sql);
+            st.setString(1, User);
+            ResultSet rs=st.executeQuery();
+            while(rs.next()){
+            UserName.setText(rs.getString("user_name"));
+            FirstName.setText(rs.getString("firstname"));
+            LastName.setText(rs.getString("lastname"));
+            Age.setText(rs.getString("age"));
+            Email.setText(rs.getString("email"));
+            Contact.setText(rs.getString("contact"));
+            Password.setText(rs.getString("password"));
+            
+            
+            }
+        }
+        catch (SQLException ex) {
+        }
     }
 
     /**
      * Creates new form EmployeeDetails
      */
-    public EmployeeDetails() {
+    public EmployeeDetails(String User) {
         initComponents();
+        this.User=User;
+        this.fetchData();
     }
 
     /**
@@ -185,11 +207,11 @@ public class EmployeeDetails extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(EmployeeDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        fetchData();
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EmployeeDetails().setVisible(true);
+                new EmployeeDetails(User).setVisible(true);
             }
         });
     }
@@ -211,4 +233,9 @@ public class EmployeeDetails extends javax.swing.JFrame {
     private javax.swing.JLabel password;
     private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
+    private static String User;
+    private static Connection conn;
+    private static String sql ="select * from employee where user_name= ? ";
 }
+
+

@@ -9,7 +9,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  *
@@ -61,6 +60,11 @@ public class Login_Signup extends javax.swing.JFrame {
 
         category.setMaximumRowCount(2);
         category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "employee", "manager", " " }));
+        category.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoryActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Employee Management System");
 
@@ -101,7 +105,7 @@ public class Login_Signup extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(category, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(password, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(username, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))))
+                                .addComponent(username, javax.swing.GroupLayout.Alignment.LEADING))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(114, 114, 114)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -168,7 +172,7 @@ public class Login_Signup extends javax.swing.JFrame {
                     if(pass.equals(mpassword)&& category.equals("e"))
                      {
                          System.out.println("entering employee");
-                        EmployeeDetails employeeDetails=new EmployeeDetails();
+                        EmployeeDetails employeeDetails=new EmployeeDetails(user_name);
                         employeeDetails.setVisible(true);
                         dispose();
                      }
@@ -200,6 +204,10 @@ public class Login_Signup extends javax.swing.JFrame {
     private void password(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password
         // TODO add your handling code here:
     }//GEN-LAST:event_password
+
+    private void categoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_categoryActionPerformed
 
     /**
      * @param args the command line arguments
