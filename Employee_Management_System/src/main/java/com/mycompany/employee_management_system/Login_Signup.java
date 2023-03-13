@@ -138,6 +138,7 @@ public class Login_Signup extends javax.swing.JFrame {
         muser_name=username.getText().trim();
         mpassword =String.valueOf(password.getPassword());
         mcategory=String.valueOf(category.getSelectedItem());
+       
         System.out.println(muser_name+" "+ mpassword);
         if(!muser_name.equals("")&&!mpassword.equals("")&&mcategory.equals("employee"))
             fetchlogin(Sqle,"e");

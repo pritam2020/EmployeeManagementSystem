@@ -10,6 +10,10 @@ package com.mycompany.employee_management_system;
  */
 public class EmployeeDetails extends javax.swing.JFrame {
 
+    private static void fetchData() {
+        
+    }
+
     /**
      * Creates new form EmployeeDetails
      */
@@ -46,19 +50,19 @@ public class EmployeeDetails extends javax.swing.JFrame {
 
         jLabel1.setText("Personal Details");
 
-        firstname.setText("First Name");
+        firstname.setText("First Name :");
 
-        lastname.setText("Last Name");
+        lastname.setText("Last Name :");
 
-        age.setText("Age");
+        age.setText("Age :");
 
-        username.setText("User Name");
+        username.setText("User Name :");
 
-        email.setText("Email");
+        email.setText("Email :");
 
-        password.setText("Password");
+        password.setText("Password :");
 
-        contact.setText("Contact");
+        contact.setText("Contact :");
 
         FirstName.setText("jLabel9");
 
@@ -181,7 +185,7 @@ public class EmployeeDetails extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(EmployeeDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        fetchData();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
