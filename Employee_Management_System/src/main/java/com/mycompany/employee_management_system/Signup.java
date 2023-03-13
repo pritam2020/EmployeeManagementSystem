@@ -30,7 +30,7 @@ public class Signup extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
+        category = new javax.swing.JComboBox<>();
         firstName = new javax.swing.JTextField();
         lastName = new javax.swing.JTextField();
         age = new javax.swing.JTextField();
@@ -50,8 +50,8 @@ public class Signup extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jComboBox1.setMaximumRowCount(2);
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "employee", "manager" }));
+        category.setMaximumRowCount(2);
+        category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "employee", "manager" }));
 
         jLabel1.setText("age");
 
@@ -120,7 +120,7 @@ public class Signup extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(category, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(210, 210, 210)
                         .addComponent(submit)))
@@ -131,7 +131,7 @@ public class Signup extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(category, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -164,12 +164,12 @@ public class Signup extends javax.swing.JFrame {
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         mpassword =String.valueOf(password.getPassword());
         mconfirmpassword =String.valueOf(confirmPassword.getPassword());
-        mfirstname=firstName.getText();
-        mlastname=lastName.getText();
-        memail=email.getText();
-        mage=age.getText();
-        mcontact=contact.getText();
-        mcategary=String.valueOf(jComboBox1.getSelectedItem());
+        mfirstname=firstName.getText().trim();
+        mlastname=lastName.getText().trim();
+        memail=email.getText().trim();
+        mage=age.getText().trim();
+        mcontact=contact.getText().trim();
+        mcategary=String.valueOf(category.getSelectedItem());
         System.out.println(mpassword+"\n"+mconfirmpassword+"\n"+mfirstname+"\n"+mlastname+"\n"+memail+"\n"+mage+"\n"+mcontact+"\n"+mcategary);
         if(inputfieldValidate()==true && passVerification(mpassword,mconfirmpassword)==true)
         {
@@ -263,11 +263,11 @@ public class Signup extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField age;
+    private javax.swing.JComboBox<String> category;
     private javax.swing.JPasswordField confirmPassword;
     private javax.swing.JTextField contact;
     private javax.swing.JTextField email;
     private javax.swing.JTextField firstName;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

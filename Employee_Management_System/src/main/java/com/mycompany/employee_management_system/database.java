@@ -9,9 +9,10 @@ package com.mycompany.employee_management_system;
  * @author RIVERSIDE-19
  */
 public class database {
-    public static final String Url ="jdbc:mysql://localhost:3306/emloyeemanagementsystem";
-    public static final String dbPassword ="PRITAMROY";
+    public static final String Url ="jdbc:mysql://localhost:3306/employeemanagementsystem";
+    //public static final String dbPassword ="PRITAMROY";
     public static final String dbUser="root";
+    public static final String dbPassword ="pritam";
    
 
     

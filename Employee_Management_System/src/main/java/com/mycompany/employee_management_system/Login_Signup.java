@@ -6,7 +6,9 @@ package com.mycompany.employee_management_system;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
@@ -58,7 +60,7 @@ public class Login_Signup extends javax.swing.JFrame {
         });
 
         category.setMaximumRowCount(2);
-        category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee", "Manager", "" }));
+        category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "employee", "manager", " " }));
 
         jLabel1.setText("Employee Management System");
 
@@ -73,7 +75,6 @@ public class Login_Signup extends javax.swing.JFrame {
             }
         });
 
-        password.setText("jPasswordField1");
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 password(evt);
@@ -89,17 +90,18 @@ public class Login_Signup extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(146, 146, 146)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(category, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(6, 6, 6)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(category, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(password, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(username, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(114, 114, 114)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -133,27 +135,60 @@ public class Login_Signup extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameActionPerformed
 
     private void login(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login
-        user_name=username.getText().toString();
-        pass =password.getPassword().toString();
-        System.out.println(user_name+" "+ pass);
-         try{  
-            Class.forName("com.mysql.jdbc.Driver");  
-            Connection con=DriverManager.getConnection(  
-            "jdbc:mysql://localhost:3306/emloyeemanagementsystem","root","PRITAMROY");  
-            //here sonoo is database name, root is username and password  
-            Statement stmt=con.createStatement();  
-            ResultSet rs=stmt.executeQuery("select * from "+category.getSelectedItem().toString().toLowerCase()+" where user_name="+"'"+user_name+"'");  
-            while(rs.next())  
-            System.out.println(rs.getString(1)+"  "+rs.getString(2)+"  "+rs.getInt(3)+rs.getString(4)+rs.getString(5)+rs.getString(6)+rs.getInt(7));  
-            con.close();  
-        }
-        catch(Exception e)
-        { 
-            System.out.println(e);
-        }  
-        
+        muser_name=username.getText().trim();
+        mpassword =String.valueOf(password.getPassword());
+        mcategory=String.valueOf(category.getSelectedItem());
+        System.out.println(muser_name+" "+ mpassword);
+        if(!muser_name.equals("")&&!mpassword.equals("")&&mcategory.equals("employee"))
+            fetchlogin(Sqle,"e");
+        else if(!muser_name.equals("")&&!mpassword.equals("")&&mcategory.equals("manager"))
+            fetchlogin(Sqlm,"m");
+        else
+            System.out.println("input the credentials");
+            
     }//GEN-LAST:event_login
 
+    private void fetchlogin(String sql,String category){
+         try{ 
+               
+            
+            con = DriverManager.getConnection(database.Url,database.dbUser,database.dbPassword);
+            System.out.println("conection info"+con);
+            st=con.prepareStatement(sql);
+            st.setString(1,muser_name);
+            boolean validate=st.execute();
+            ResultSet rs=st.getResultSet();
+          
+            if(rs.next()){
+            do{
+                    String pass= rs.getString("password");
+                    String user_name= rs.getString("user_name");
+                    System.out.println("\n name: "+user_name+"\n password: "+pass+"");
+                    if(pass.equals(mpassword)&& category.equals("e"))
+                     {
+                         System.out.println("entering employee");
+                        EmployeeDetails employeeDetails=new EmployeeDetails();
+                        employeeDetails.setVisible(true);
+                        dispose();
+                     }
+                    else if(pass.equals(mpassword)&& category.equals("m"))
+                    {
+                        System.out.println("entering manager");
+                        Manager manager=new Manager();
+                        manager.setVisible(true);
+                        dispose();
+                    }else
+                        System.out.println("password dose not match");
+            }while(rs.next());
+            }else
+                System.out.println("user dosenot exists");
+           
+               
+            }catch (SQLException ex){
+               
+                System.out.println(ex);
+                }
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
                 // TODO add your handling code here:
                 Signup SignUp=new Signup();
@@ -212,5 +247,9 @@ public class Login_Signup extends javax.swing.JFrame {
     private javax.swing.JPasswordField password;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
-    private String pass,user_name;
+    private static String mpassword,muser_name,mcategory;
+    private static Connection con;
+    private static PreparedStatement st;
+    private static final String Sqle="select user_name,password from employee where user_name = ? ";
+    private static final String Sqlm="select user_name,password from manager where user_name = ? ";
 }
