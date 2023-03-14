@@ -10,13 +10,13 @@ import java.sql.*;
  *
  * @author RIVERSIDE-19
  */
-public class Signup extends javax.swing.JFrame {
+public class SignupManagers extends javax.swing.JFrame {
 
     /**
      * Creates new form Signup
      */
     
-    public Signup() {
+    public SignupManagers() {
         
         initComponents();
     }
@@ -30,7 +30,6 @@ public class Signup extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        category = new javax.swing.JComboBox<>();
         firstName = new javax.swing.JTextField();
         lastName = new javax.swing.JTextField();
         age = new javax.swing.JTextField();
@@ -50,9 +49,6 @@ public class Signup extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        category.setMaximumRowCount(2);
-        category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "employee", "manager" }));
-
         jLabel1.setText("age");
 
         jLabel2.setText("First Name");
@@ -67,7 +63,7 @@ public class Signup extends javax.swing.JFrame {
 
         jLabel7.setText("Confirm Password");
 
-        jLabel8.setText("Employement Type");
+        jLabel8.setText("Registrarion of Managers");
 
         submit.setText("Submit");
         submit.addActionListener(new java.awt.event.ActionListener() {
@@ -118,9 +114,7 @@ public class Signup extends javax.swing.JFrame {
                                 .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(category, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel8))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(210, 210, 210)
                         .addComponent(submit)))
@@ -129,10 +123,8 @@ public class Signup extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(category, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                .addGap(29, 29, 29)
+                .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -153,7 +145,7 @@ public class Signup extends javax.swing.JFrame {
                     .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(confirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(submit)
                 .addGap(14, 14, 14))
         );
@@ -169,15 +161,13 @@ public class Signup extends javax.swing.JFrame {
         memail=email.getText().trim();
         mage=age.getText().trim();
         mcontact=contact.getText().trim();
-        mcategary=String.valueOf(category.getSelectedItem());
-        System.out.println(mpassword+"\n"+mconfirmpassword+"\n"+mfirstname+"\n"+mlastname+"\n"+memail+"\n"+mage+"\n"+mcontact+"\n"+mcategary);
+
+        System.out.println(mpassword+"\n"+mconfirmpassword+"\n"+mfirstname+"\n"+mlastname+"\n"+memail+"\n"+mage+"\n"+mcontact);
         if(inputfieldValidate()==true && passVerification(mpassword,mconfirmpassword)==true)
         {
-            if(mcategary.equals("employee")) {
-                executeQuery(SqlE);
-            } else {
+
                 executeQuery(SqlM);
-            }
+
             
             
         }else{}            
@@ -198,7 +188,7 @@ public class Signup extends javax.swing.JFrame {
         try{
                
             
-            conn = DriverManager.getConnection(database.Url,database.dbUser,database.dbPassword);
+            conn = databaseConnection.getConnection();
             System.out.println("conection info"+conn);
             st=conn.prepareStatement(sql);
             st.setString(1,mfirstname);
@@ -210,6 +200,9 @@ public class Signup extends javax.swing.JFrame {
             st.setString(7,mcontact);
             int rs=st.executeUpdate();
             System.out.println(rs);
+            if(rs==1)
+            {new ManagerDashboard().setVisible(true);dispose();}
+            else{System.out.println("error in line 208 in Signup.java (sql error)");}
                
             }catch (SQLException ex){
                
@@ -219,7 +212,7 @@ public class Signup extends javax.swing.JFrame {
 
 
     public boolean inputfieldValidate(){
-    if(!mpassword.equals(null) && !mconfirmpassword.equals(null) && !mfirstname.equals(null) && !mlastname.equals(null) && !mage.equals(null) &&!memail.equals(null) &&!mcontact.equals(null) && !mcategary.equals(null)) {
+    if(!mpassword.equals(null) && !mconfirmpassword.equals(null) && !mfirstname.equals(null) && !mlastname.equals(null) && !mage.equals(null) &&!memail.equals(null) &&!mcontact.equals(null)) {
         return true;
     } else
     {
@@ -243,27 +236,27 @@ public class Signup extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignupManagers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignupManagers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignupManagers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignupManagers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         
        // System.out.println(i);
         java.awt.EventQueue.invokeLater(() -> {
-            new Signup().setVisible(true);
+            new SignupManagers().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField age;
-    private javax.swing.JComboBox<String> category;
     private javax.swing.JPasswordField confirmPassword;
     private javax.swing.JTextField contact;
     private javax.swing.JTextField email;
@@ -283,10 +276,8 @@ public class Signup extends javax.swing.JFrame {
     
     private PreparedStatement st;
     private Connection conn;
-    private String mpassword,mconfirmpassword,mfirstname,mlastname,memail,mcategary,mcontact,mage;
-//    private static final String Url ="jdbc:mysql://localhost:3306/emloyeemanagementsystem";
-//    private static final String dbPassword ="PRITAMROY";
-//    private static final String dbUser="root";
-    private static final String SqlE="insert into employee values (?,?,?,?,?,?,?)";
+    private String mpassword,mconfirmpassword,mfirstname,mlastname,memail,mcontact,mage;
+
+    //private static final String SqlE="insert into employee values (?,?,?,?,?,?,?)";
     private static final String SqlM="insert into manager values (?,?,?,?,?,?,?)";
 }

@@ -14,7 +14,7 @@ public class EmployeeDetails extends javax.swing.JFrame {
 
     private  void fetchData() {
         try {
-            conn=DriverManager.getConnection(database.Url,database.dbUser,database.dbPassword);
+            conn=DriverManager.getConnection(databaseConnection.Url,databaseConnection.dbUser,databaseConnection.dbPassword);
             PreparedStatement st=conn.prepareStatement(sql);
             st.setString(1, User);
             ResultSet rs=st.executeQuery();

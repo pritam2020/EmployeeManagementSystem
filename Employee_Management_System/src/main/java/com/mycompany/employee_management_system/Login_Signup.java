@@ -157,7 +157,7 @@ public class Login_Signup extends javax.swing.JFrame {
          try{ 
                
             
-            con = DriverManager.getConnection(database.Url,database.dbUser,database.dbPassword);
+            con = databaseConnection.getConnection();
             System.out.println("conection info"+con);
             st=con.prepareStatement(sql);
             st.setString(1,muser_name);
@@ -179,7 +179,7 @@ public class Login_Signup extends javax.swing.JFrame {
                     else if(pass.equals(mpassword)&& category.equals("m"))
                     {
                         System.out.println("entering manager");
-                        Manager manager=new Manager();
+                        ManagerDashboard manager=new ManagerDashboard();
                         manager.setVisible(true);
                         dispose();
                     }else
@@ -196,7 +196,7 @@ public class Login_Signup extends javax.swing.JFrame {
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
                 // TODO add your handling code here:
-                Signup SignUp=new Signup();
+                SignupManagers SignUp=new SignupManagers();
                 SignUp.show();
                 dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
