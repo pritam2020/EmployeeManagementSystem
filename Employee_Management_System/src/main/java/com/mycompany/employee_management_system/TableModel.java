@@ -43,6 +43,37 @@ public class TableModel extends AbstractTableModel{
     @Override
     public
     Object getValueAt(int rowIndex, int columnIndex) {
+        try{
+            obj.absolute(rowIndex);
+        switch(columnIndex){
+        
+            case 1:
+                obj.getString(columnIndex);
+                break;
+            case 2:
+                obj.getString(columnIndex);
+                break;
+            case 3:
+                obj.getInt(columnIndex);
+                break;
+            case 4:
+                obj.getString(columnIndex);
+                break;
+                
+            case 5:
+                obj.getString(columnIndex);
+                break;
+            case 6:
+                obj.getInt(columnIndex);
+                break;
+            case 7:
+                obj.getString(columnIndex);
+                break;
+                
+        }
+        }catch(SQLException Ex){}
+        
+        
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
