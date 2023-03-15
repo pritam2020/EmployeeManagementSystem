@@ -21,46 +21,35 @@ public class ManagerDashboard extends javax.swing.JFrame {
      */
     public ManagerDashboard() {
         initComponents();
-        try{
-            Statement st=databaseConnection.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
-            ResultSet rs=st.executeQuery("select * from employee");
-           
-            
-            while(rs.next()){
-//                rowData[rs.getRow()-1][1-1]=(rs.getString("firstname"));
-//                rowData[rs.getRow()-1][2-1]=(rs.getString("lastname"));
-//                rowData[rs.getRow()-1][3-1]=(String.valueOf(rs.getInt("age")));
-//                rowData[rs.getRow()-1][4-1]=(rs.getString("user_name"));
-//                rowData[rs.getRow()-1][5-1]=(rs.getString("email"));
-//                rowData[rs.getRow()-1][6-1]=(rs.getString("password"));
-//                rowData[rs.getRow()-1][7-1]=rs.getString("contact");
-                table.setValueAt(rs.getString("firstname"), rs.getRow()-1, 0);
-                table.setValueAt(rs.getString("lastname"), rs.getRow()-1, 2-1);
-                table.setValueAt(rs.getInt("age"), rs.getRow()-1, 3-1);
-                table.setValueAt(rs.getString("user_name"), rs.getRow()-1, 4-1);
-                table.setValueAt(rs.getString("email"), rs.getRow()-1, 5-1);
-                table.setValueAt(rs.getString("password"), rs.getRow()-1, 6-1);
-                table.setValueAt("9836186181", rs.getRow()-1, 7-1);
-                 
-            }
-         //    table=new javax.swing.JTable(new TableModel(rs));
-//            for(int i=0;i<rowCount;i++){
-//                for(int j=0;j<7;j++){
-//                    System.out.println(rowData[i][j]);
-//                } System.out.println("   ");
-//                
-//            }
-  //          table =new javax.swing.JTable(rowData,new Object[] {"FirstName","LastName","Age","UserName","Email","Password","Contact"});
-            
-            
-        }catch(SQLException Ex){
-            System.out.println(Ex);
-        }
-        catch(Exception ex){
-        System.out.println(ex);}
+       TableData.data(table);
+        
         
     }
-
+//    private void Data(){
+//        try{
+//            Statement st=databaseConnection.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+//            ResultSet rs=st.executeQuery("select * from employee");
+//           
+//            while(rs.next()){
+//                table.setValueAt(rs.getString("firstname"), rs.getRow()-1, 0);
+//                table.setValueAt(rs.getString("lastname"), rs.getRow()-1, 2-1);
+//                table.setValueAt(rs.getInt("age"), rs.getRow()-1, 3-1);
+//                table.setValueAt(rs.getString("user_name"), rs.getRow()-1, 4-1);
+//                table.setValueAt(rs.getString("email"), rs.getRow()-1, 5-1);
+//                table.setValueAt(rs.getString("password"), rs.getRow()-1, 6-1);
+//                table.setValueAt("9836186181", rs.getRow()-1, 7-1);
+//                 }
+//
+//            }catch(SQLException Ex){
+//            System.out.println(Ex);
+//        }
+//        catch(Exception ex){
+//        System.out.println(ex);}
+//    }
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
