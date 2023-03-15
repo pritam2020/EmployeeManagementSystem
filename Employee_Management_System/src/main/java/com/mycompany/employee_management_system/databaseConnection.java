@@ -11,12 +11,17 @@ import java.sql.*;
  * @author RIVERSIDE-19
  */
 public class databaseConnection {
-        public static final String Url ="jdbc:mysql://localhost:3306/emloyeemanagementsystem";
-        public static final String dbPassword ="PRITAMROY";
+        public static final String Url ="jdbc:mysql://localhost:3306/employeemanagementsystem";
+     //public static final String dbPassword ="PRITAMROY";
         public static final String dbUser="root";
-        //public static final String dbPassword ="pritam";
-    public static Connection getConnection() throws SQLException {
-     return DriverManager.getConnection(Url,dbUser,dbPassword);
+        public static final String dbPassword ="pritam";
+        public static Connection getConnection() throws SQLException {
+            try{
+                return DriverManager.getConnection(Url,dbUser,dbPassword);
+            }catch(SQLException ex){
+                throw ex;
+            }
+        
     }
     
    

@@ -22,7 +22,9 @@ public class TableModel extends AbstractTableModel{
             obj.last();
             rowcount = obj.getRow();
             obj.beforeFirst();
-        }catch(SQLException Ex){}
+        }catch(SQLException Ex){
+            System.out.println(Ex);
+        }
         
     
     }
@@ -43,38 +45,46 @@ public class TableModel extends AbstractTableModel{
     @Override
     public
     Object getValueAt(int rowIndex, int columnIndex) {
-        try{
-            obj.absolute(rowIndex);
-        switch(columnIndex){
+        System.out.println("row: "+rowIndex +"\n column: "+columnIndex);
+//        try{
+//            obj.absolute(rowIndex);
+//        switch(columnIndex){
+//        
+//            case 1:
+//                obj.getString(columnIndex);
+//                break;
+//            case 2:
+//                obj.getString(columnIndex);
+//                break;
+//            case 3:
+//                obj.getInt(columnIndex);
+//                break;
+//            case 4:
+//                obj.getString(columnIndex);
+//                break;
+//                
+//            case 5:
+//                obj.getString(columnIndex);
+//                break;
+//            case 6:
+//                obj.getInt(columnIndex);
+//                break;
+//            case 7:
+//                obj.getString(columnIndex);
+//                break;
+//                
+
+                return "hello";
+//                obj.absolute(rowIndex+1);
+//                return obj.getObject(columnIndex+1);
+ //       }
+//        }catch(SQLException Ex){
+//            System.out.println("error in line 77 in TableModel.java");
+//            return null;
+}
         
-            case 1:
-                obj.getString(columnIndex);
-                break;
-            case 2:
-                obj.getString(columnIndex);
-                break;
-            case 3:
-                obj.getInt(columnIndex);
-                break;
-            case 4:
-                obj.getString(columnIndex);
-                break;
-                
-            case 5:
-                obj.getString(columnIndex);
-                break;
-            case 6:
-                obj.getInt(columnIndex);
-                break;
-            case 7:
-                obj.getString(columnIndex);
-                break;
-                
-        }
-        }catch(SQLException Ex){}
         
-        
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+      
+//    }
     
 }

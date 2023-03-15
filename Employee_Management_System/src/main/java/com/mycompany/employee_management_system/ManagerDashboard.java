@@ -21,7 +21,7 @@ public class ManagerDashboard extends javax.swing.JFrame {
     public ManagerDashboard() {
         initComponents();
         try{
-            Statement st=databaseConnection.getConnection().createStatement();
+            Statement st=databaseConnection.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
             ResultSet rs=st.executeQuery("select * from manager");
             while(rs.next()){
 //                UserName=(rs.getString("user_name"));
@@ -37,8 +37,11 @@ public class ManagerDashboard extends javax.swing.JFrame {
             
             
         }catch(SQLException Ex){
-            
+            System.out.println(Ex);
         }
+        catch(Exception ex){
+        System.out.println(ex);}
+        
     }
 
     /**
