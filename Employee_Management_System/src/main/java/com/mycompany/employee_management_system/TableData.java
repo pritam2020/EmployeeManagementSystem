@@ -21,7 +21,7 @@ public final class TableData {
             rs.last();
             int rowCount=rs.getRow();
             rs.beforeFirst();
-            table.set
+           
             while(rs.next()){
                 table.setValueAt(rs.getString("firstname"), rs.getRow()-1, 0);
                 table.setValueAt(rs.getString("lastname"), rs.getRow()-1, 2-1);
