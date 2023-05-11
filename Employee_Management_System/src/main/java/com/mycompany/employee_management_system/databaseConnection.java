@@ -11,10 +11,10 @@ import java.sql.*;
  * @author RIVERSIDE-19
  */
 public class databaseConnection {
-     private static final String Url ="jdbc:mysql://localhost:3306/emloyeemanagementsystem";
-     private static final String dbPassword ="PRITAMROY";
+     private static final String Url ="jdbc:mysql://localhost:3306/employeemanagementsystem";
+     //private static final String dbPassword ="PRITAMROY";
      private static final String dbUser="root";
-     //public static final String dbPassword ="pritam";
+     public static final String dbPassword ="pritam";
         
      
      

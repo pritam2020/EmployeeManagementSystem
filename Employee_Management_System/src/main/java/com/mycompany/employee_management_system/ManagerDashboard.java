@@ -88,28 +88,9 @@ public class ManagerDashboard extends javax.swing.JFrame {
         });
 
         table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
+            new Object [][] {},
             new String [] {
-                "FirstName", "LastName", "Age", "UserName", "Email", "Password", "Contact"
+                "FirstName", "LastName", "Age", "UserName", "Email", "Password", "Contact","performance","promotion","bonus"
             }
         ));
         jScrollPane2.setViewportView(table);

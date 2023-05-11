@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,15 +22,22 @@ public final class TableData {
             rs.last();
             int rowCount=rs.getRow();
             rs.beforeFirst();
-           
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            model.setRowCount(0); 
+         
             while(rs.next()){
-                table.setValueAt(rs.getString("firstname"), rs.getRow()-1, 0);
-                table.setValueAt(rs.getString("lastname"), rs.getRow()-1, 2-1);
-                table.setValueAt(rs.getInt("age"), rs.getRow()-1, 3-1);
-                table.setValueAt(rs.getString("user_name"), rs.getRow()-1, 4-1);
-                table.setValueAt(rs.getString("email"), rs.getRow()-1, 5-1);
-                table.setValueAt(rs.getString("password"), rs.getRow()-1, 6-1);
-                table.setValueAt(rs.getString("contact"), rs.getRow()-1, 7-1);
+                String firstName = rs.getString("firstname");
+                String lastName = rs.getString("lastname");
+                int age = rs.getInt("age");
+                String userName = rs.getString("user_name");
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                String contact = rs.getString("contact");
+                String performance =String.valueOf(rs.getInt("performance"));
+                String promotion =String.valueOf(rs.getInt("promotion"));
+                String bonus =String.valueOf(rs.getInt("bonus"));
+
+                model.addRow(new Object[]{firstName, lastName, age, userName, email, password, contact,performance,promotion,bonus});
                  }
 
             }catch(SQLException Ex){

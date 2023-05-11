@@ -288,7 +288,7 @@ public class AddEmployees extends javax.swing.JFrame {
     private javax.swing.JButton submit;
     // End of variables declaration//GEN-END:variables
     private String mpassword,mconfirmpassword,mfirstname,mlastname,memail,mcontact,mage;
-    private static final String SqlE="insert into employee values (?,?,?,?,?,?,?)";
+    private static final String SqlE="insert into employee values (?,?,?,?,?,?,?,0,0,0)";
     private PreparedStatement st;
     private Connection conn;
 }
